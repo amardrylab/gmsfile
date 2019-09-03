@@ -1,2 +1,2 @@
 name="gmsfile"
-from gmsfile import xyztogms
+from gmsfile import gms

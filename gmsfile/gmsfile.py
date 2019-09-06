@@ -1,6 +1,11 @@
 import re
 
 class gms:
+	__text__=''
+	__purpose__=' $contrl runtyp=energy $end\n'
+	__method__=' $contrl scftyp=rfh $end\n'
+	__basis__=' $basis gbasis=sto ngauss=3 $end\n'
+	
 	def __init__(self, infile='mol.xyz'):
 		an={
 			'H': '     1.0     ',
@@ -42,12 +47,9 @@ class gms:
 			'Ru': '   44.0     ',
 		}
 
-		text=''
-		runtype=' $contrl runtyp=energy $end\n'
-		scftype=' $contrl scftyp=rhf $end\n'
-		basis  =' $basis gbasis=sto ngauss=3 $end\n'
+		self.__text__=''
 		data   =' $data\nTitle\nC1\n'
-		text+= runtype + scftype + basis + data
+		self.__text__ +=data
 
 		pat=re.compile('\s+')
 
@@ -57,14 +59,20 @@ class gms:
 		for line in f:
 			line=line.strip()
 			(element,coor)=pat.split(line, 1)
-			text+=element+an[element]+coor+'\n'
-		text+=' $end\n'
+			self.__text__+=element+an[element]+coor+'\n'
+		self.__text__+=' $end\n'
 
-		self.infile = infile
-		self.text = text
 		f.close()
 
+	def runtyp(purpose=''):
+		__purpose__='$contrl runtyp=energy $end'
+
 	def out(self, outfile="mol.inp"):
+		data=''
+		data += self.__purpose__
+		data +=self.__method__
+		data +=self.__basis__
+		data +=self.__text__
 		f=open(outfile, 'w')
-		f.write(self.text)
+		f.write(data)
 		f.close()

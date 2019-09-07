@@ -1,2 +1,2 @@
 name="gmsfile"
-from gmsfile import gms
+from __main__ import gms

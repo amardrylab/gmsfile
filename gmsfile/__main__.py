@@ -1,7 +1,11 @@
 import re
+from _purpose import purpose
+from _method import method
+from _basisset import basisset
+from _output import output
 
-class gms:
-	__text__=''
+class gms(purpose, method, basisset, output):
+	__data__=''
 	__purpose__=' $contrl runtyp=energy $end\n'
 	__method__=' $contrl scftyp=rhf $end\n'
 	__basis__=' $basis gbasis=sto ngauss=3 $end\n'
@@ -54,9 +58,9 @@ class gms:
 			'Ru': '   44.0     ',
 			'Rh': '   45.0     ',
 		}
-		self.__text__=''
-		data   =' $data\nTitle\nC1\n'
-		self.__text__ +=data
+		self.__data__=''
+		header   =' $data\nTitle\nC1\n'
+		self.__data__ +=header
 
 		pat=re.compile('\s+')
 
@@ -66,26 +70,7 @@ class gms:
 		for line in f:
 			line=line.strip()
 			(element,coor)=pat.split(line, 1)
-			self.__text__+=element+an[element]+coor+'\n'
-		self.__text__+=' $end\n'
+			self.__data__+=element+an[element]+coor+'\n'
+		self.__data__+=' $end\n'
 
-		f.close()
-
-	def runtyp(self, purpose='energy'):
-		line= {
-			'energy': ' $contrl runtyp=energy $end\n',
-			'opt': ' $contrl runtyp=optimize $end\n $statpt opttol=0.0001 nstep=20 $end\n',
-			'freq': ' $contrl runtyp=hessian $end\n $force method=analytic vibanal=.true. $end\n $statpt opttol=0.0001 nstep=20 $end\n',
-			'irc': ' $contrl runtyp=irc $end\n',
-		}
-		self.__purpose__= line[purpose]
-
-	def out(self, outfile="mol.inp"):
-		data=''
-		data += self.__purpose__
-		data +=self.__method__
-		data +=self.__basis__
-		data +=self.__text__
-		f=open(outfile, 'w')
-		f.write(data)
 		f.close()

@@ -15,9 +15,9 @@ class purpose:
 
 
 		card= {
-			'energy':energy,
-			'opt'   :opt, 
-			'freq'  :freq, 
-			'irc'   :irc,
+			'ENERGY':energy,
+			'OPT'   :opt, 
+			'FREQ'  :freq, 
+			'IRC'   :irc,
 			}
-		self.__purpose__= card[purpose]
+		self.__purpose__= card[purpose.upper()]

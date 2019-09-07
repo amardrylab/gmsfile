@@ -6,8 +6,8 @@ class method:
 		rohf  = ' $contrl scftyp=rohf maxit=100 $end\n'
 
 		list={
-			'rhf' :rhf,
-			'uhf' :uhf,
-			'rohf':rohf,
+			'RHF' :rhf,
+			'UHF' :uhf,
+			'ROHF':rohf,
 		}
-		self.__method__=list[type]
+		self.__method__=list[type.upper()]

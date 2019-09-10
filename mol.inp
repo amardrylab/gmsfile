@@ -1,7 +1,7 @@
- $contrl runtyp=energy $end
+ $contrl runtyp=optimize $end
+ $statpt opttol=0.0001 nstep=100 $end
  $contrl scftyp=rhf $end
- $basis gbasis=sbk ngauss=3 ndfunc=1 $end
- $contrl ecp=sbk $end
+ $basis gbasis=N31 ngauss=6 ndfunc=1 npfunc=1 $end
  $data
 Title
 C1

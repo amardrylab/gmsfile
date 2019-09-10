@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
         name="gmsfile",
-        version="0.0.4",
+        version="0.0.5",
         author="Gourab Kanti Das",
         author_email="gourabkanti.das@visva-bharati.ac.in",
         description="A converter from XYZ to GAMESS file",
@@ -18,5 +18,5 @@ setuptools.setup(
             "License :: OSI Approved :: MIT License",
             "Operating System :: OS Independent",
         ],
-        python_requires='>=2.7',
+        python_requires='=2.7',
 )
